@@ -1,4 +1,4 @@
-function bool = Newton(grid, eye, f)
+function bool = Newton(grid, eye, rays, f)
 %f Körperfunktion von R3 nach R
 %bool = Wahrheitswert ob NS existiert
 %Falls ja, dann 1, sonst 0
@@ -7,7 +7,7 @@ function bool = Newton(grid, eye, f)
 N= zeros(size(grid,1),size(grid,2));
 h=0.01;
 eps = 0.1;
-rays = ray(grid,eye);
+%rays = ray(grid,eye);
 
 tic
 %Newtonverfahren mit numerischer Ableitung
@@ -19,7 +19,8 @@ toc
 
 %Wir machen Null zuerst weil sonst werden in bool 1 mit 0 überschrieben 
 bool = abs(M-N);
-bool(bool<eps) = [0];
-bool(bool>=eps) = [1];
+bool(bool<eps) = 0;
+bool(bool>=eps) = 1;
+bool = ones(size(grid,1),size(grid,2)) - bool;
 
 end

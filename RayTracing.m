@@ -1,10 +1,11 @@
-width = 100;
-height = 100;
+width = 1000;
+height = 1000;
 p = [8;-2.5;-2.5];
-dist = 0.05;
+dist = 0.005;
 disteye = 5;
 r1 = [0;1;0];
 r2 = [0;0;1];
+gradient = [1,1,1];
 f = @(x) x(1).^2 + x(2).^2 + x(3).^2 - 16;
 g = @(x) x(1) + 6;
 h = @(x) x(3) - 6;
@@ -12,11 +13,18 @@ k = @(x) x(3) + 6;
 l = @(x) x(2) - 6;
 m = @(x) x(2) + 6;
 
+
 [grid,eye] = CreateGrid(width, height, p, dist, disteye, r1, r2);
+rays = ray(grid,eye);
+B = Newton(grid,eye,rays,f);
 
-
-B = Newton(grid,eye,f);
-
+for i = 1:height
+    for j = 1:width
+        if B(i,j) == 1
+            B(i,j) = dot(gradient,squeeze(rays(i,j,:)));
+        end
+    end
+end
 
 % B = zeros(height +1, width +1);
 % u=MatrixRays(grid,eye)
