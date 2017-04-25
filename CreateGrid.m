@@ -25,5 +25,4 @@ end
 center = p + 1/2*width*r2 + 1/2*height*r1;
 normal = cross(r1,r2);
 eye = center + disteye*normal/norm(normal);
-
 end

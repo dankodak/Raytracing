@@ -7,9 +7,10 @@ function A = comp(f,N, rays, eye)
 
 
 A = zeros(size(rays,1),size(rays,2));
+B = zeros (size(rays));
 for i = 1:3
-    rays(:,:,i) = eye(i) + N(:,:).*rays(:,:,i);
+    (:,:,i) = eye(i) + N(:,:).*rays(:,:,i);
 end
-A(:,:) = f(rays(:,:,1),rays(:,:,2),rays(:,:,3));
+A(:,:) = f(B(:,:,1),B(:,:,2),B(:,:,3));
 
 end
