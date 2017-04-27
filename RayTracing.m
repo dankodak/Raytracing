@@ -1,7 +1,7 @@
-width = 1000;
-height = 1000;
+width = 100;
+height = 100;
 p = [8;-2.5;-2.5];
-dist = 0.005;
+dist = 0.05;
 disteye = 5;
 r1 = [0;1;0];
 r2 = [0;0;1];
@@ -18,8 +18,9 @@ h = @(x) x(3) - 6;
 k = @(x) x(3) + 6;
 l = @(x) x(2) - 6;
 m = @(x) x(2) + 6;
+ 
 tic
-
+G=grayscale(f,N,rays);
 [grid,eye] = CreateGrid(width, height, p, dist, disteye, r1, r2);
 rays = ray(grid,eye);
 [B,N] = Newton(grid,eye,rays,t);
@@ -27,4 +28,4 @@ normalen=normalvector(t,N,eye,rays);
 A = lighting(lamp,amb,dir,t,N,eye,rays,B);
 toc
 
-imagesc(A)
+imagesc(G)
