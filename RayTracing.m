@@ -18,14 +18,17 @@ h = @(x) x(3) - 6;
 k = @(x) x(3) + 6;
 l = @(x) x(2) - 6;
 m = @(x) x(2) + 6;
+q=4;
  
 tic
-G=grayscale(f,N,rays);
 [grid,eye] = CreateGrid(width, height, p, dist, disteye, r1, r2);
 rays = ray(grid,eye);
-[B,N] = Newton(grid,eye,rays,t);
-normalen=normalvector(t,N,eye,rays);
-A = lighting(lamp,amb,dir,t,N,eye,rays,B);
+[B,N] = Newton(grid,eye,rays,f);
+normalen=normalvector(f,N,eye,rays);
+A = lighting(lamp,amb,dir,f,N,eye,rays,B,width,height,q);
+
+G= grayscale(height,width,q);
+
 toc
 
-imagesc(G)
+imagesc(A)

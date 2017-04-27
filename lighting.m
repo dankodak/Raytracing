@@ -1,4 +1,4 @@
-function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool)
+function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool,width,height,k)
 %lamp= Standort der Lichtquelle
 %amb=ambiente Helligkeit der Szene
 %dir=gerichtete Lichtquelle 
@@ -7,7 +7,7 @@ function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool)
 %rays=Matrix mit Richtungvektoren der Strahlen
 %bool=Wahrheitsmatrix mit Schnittpunkt oder ohne Schnittpunkt
 
-rho = grayscale(f,N,rays);    %Albedograuwert der Oberfl?che
+rho = grayscale(width,height,k);    %Albedograuwert der Oberfl?che
 Normal = normalvector(f,N,eye,rays);
 Light=zeros(size(N));
 I_diff = Light;
