@@ -1,4 +1,4 @@
-function [A,eye] = CreateGrid(width, height, p, dist, disteye, r1, r2)
+function [A] = CreateGrid(width, height, p, dist, disteye, r1, r2)
 %width = Gitterbreite
 %height = Gitterh�he
 %p = Punkt unten links

@@ -9,7 +9,7 @@ function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool)
 
 rho = grayscale(f,N,rays);    %Albedograuwert der Oberfl?che
 Normal = normalvector(f,N,eye,rays);
-Light=zeros(size(N));
+Light=zeros(size(rays));
 I_diff = Light;
 I_amb = Light;
 I_spec = Light;
@@ -22,11 +22,11 @@ for i =1:size(rays,1)
             a = dot(squeeze(Normal(i,j,:)),lamp);
             if a> 0
                 %diffuse, d.h. blickwinkelunabh?ngige Helligkeit
-                I_diff(i,j) = dir .* rho(i,j) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,1) = dir .* rho(i,j) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
             end
         end
         %ambiente, d.h. richtungsunabh?ngige Helligkeit
-        I_amb(i,j)= amb .* rho(i,j);
+%        I_amb(i,j)= amb .* rho(i,j);
         %I_spec(i,j)=
     end
 end
