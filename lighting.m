@@ -1,4 +1,4 @@
-function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool)
+function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool,rho_color)
 %lamp= Standort der Lichtquelle
 %amb=ambiente Helligkeit der Szene
 %dir=gerichtete Lichtquelle 
@@ -22,7 +22,9 @@ for i =1:size(rays,1)
             a = dot(squeeze(Normal(i,j,:)),lamp);
             if a> 0
                 %diffuse, d.h. blickwinkelunabh?ngige Helligkeit
-                I_diff(i,j,1) = dir .* rho(i,j) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,1) = dir .* rho_color(1) .* rho(i,j) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,2) = dir .* rho_color(2) .* rho(i,j) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,3) = dir .* rho_color(3) .* rho(i,j) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
             end
         end
         %ambiente, d.h. richtungsunabh?ngige Helligkeit
@@ -30,5 +32,5 @@ for i =1:size(rays,1)
         %I_spec(i,j)=
     end
 end
-Light = I_diff+I_amb+I_spec;
+Light = I_diff +I_amb+I_spec;
 end

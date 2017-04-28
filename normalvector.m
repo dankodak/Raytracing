@@ -1,7 +1,7 @@
 function [Normal]= normalvector(f,N,eye,rays)
 
 Normal = zeros(size(rays));
-h=0.001;
+h=0.0000001;
 
 for i = 1:3
     rays(:,:,i) = eye(i) + N(:,:).*rays(:,:,i); 
