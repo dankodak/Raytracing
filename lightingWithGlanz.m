@@ -1,4 +1,4 @@
-function [Light]=lighting(lamp,amb,dir,f,N,eye,rays,bool,rho_color)
+function [Light]=lightingWithGlanz(lamp,amb,dir,f,N,eye,rays,bool,rho_color)
 %lamp= Standort der Lichtquelle
 %amb=ambiente Helligkeit der Szene
 %dir=gerichtete Lichtquelle 
@@ -13,6 +13,7 @@ Light=zeros(size(rays));
 I_diff = Light;
 I_amb = Light;
 I_spec = Light;
+
 Surface= zeros(size(rays));
 
 %Oberflaechenpunkte
@@ -28,9 +29,9 @@ for i =1:size(rays,1)
             a = dot(squeeze(Normal(i,j,:)),lamp);
             if a> 0
                 %diffuse, d.h. blickwinkelunabhaengige Helligkeit
-                I_diff(i,j,1) = dir .* rho_color(1) .* chessboard(squeeze(Surface(i,j,:)),0.8,0) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
-                I_diff(i,j,2) = dir .* rho_color(2) .* chessboard(squeeze(Surface(i,j,:)),0,1) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
-                I_diff(i,j,3) = dir .* rho_color(3) .* chessboard(squeeze(Surface(i,j,:)),0.7,0) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,1) = dir .* rho_color(1) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,2) = dir .* rho_color(2) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
+                I_diff(i,j,3) = dir .* rho_color(3) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
             end
         end
         %ambiente, d.h. richtungsunabhaengige Helligkeit
