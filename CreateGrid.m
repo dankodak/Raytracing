@@ -1,4 +1,4 @@
-function [A] = CreateGrid(width, height, p, dist, disteye, r1, r2)
+function [A] = CreateGrid(width, height, p, dist, r1, r2)
 %width = Gitterbreite
 %height = Gitterh�he
 %p = Punkt unten links
@@ -24,5 +24,4 @@ end
 %Auge
 center = p + 1/2*width*r2 + 1/2*height*r1;
 normal = cross(r1,r2);
-eye = center + disteye*normal/norm(normal);
 end
