@@ -7,8 +7,8 @@ r2 = [0;0;1];
 lamp=[13;0;0];
 amb=[0,0,0];
 dir=1;
-eye = [20,0,0];
-amount_objects = 3;
+eye = [11,0,0];
+amount_objects = 1;
 chess = zeros(amount_objects,1);
 chess(2)=1;
 rho = ones(3,amount_objects);
@@ -37,7 +37,7 @@ NS = Bool;
 
 for i = 1:amount_objects
     [Bool(:,:,i),NS(:,:,i)] = Newton(grid,eye,rays,objects(i));
-    ABig(:,:,:,i) = lightingWithChessboard(lamp,amb,dir,objects(i),NS(:,:,i),eye,rays,Bool(:,:,i),rho(:,i),chess(i));
+    ABig(:,:,:,i) = lighting(lamp,amb,dir,objects(i),NS(:,:,i),eye,rays,Bool(:,:,i),rho(:,i),chess(i));
 end
 
 for i = 1:height+1
