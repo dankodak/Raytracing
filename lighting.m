@@ -27,7 +27,7 @@ if chess == 1
             %prueft ob Schnittpunkt positiv ist
             if bool(i,j)>0
                 a = dot(squeeze(Normal(i,j,:)),lamp);
-                if a> 0
+                if a< 0
                     %diffuse, d.h. blickwinkelunabhaengige Helligkeit
                     I_diff(i,j,1) = dir .* rho_color(1) .* chessboard(squeeze(Surface(i,j,:)),1,0) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
                     I_diff(i,j,2) = dir .* rho_color(2) .* chessboard(squeeze(Surface(i,j,:)),0,1) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
@@ -48,7 +48,7 @@ else
             %prueft ob Schnittpunkt positiv ist
             if bool(i,j)>0
                 a = dot(squeeze(Normal(i,j,:)),lamp);
-                if a> 0
+                if a< 0
                     %diffuse, d.h. blickwinkelunabhaengige Helligkeit
                     I_diff(i,j,1) = dir .* rho_color(1) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
                     I_diff(i,j,2) = dir .* rho_color(2) .* norm(a)./(norm(squeeze(Normal(i,j,:))).*norm(lamp));
