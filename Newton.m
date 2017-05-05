@@ -5,7 +5,7 @@ function [bool,N] = Newton(grid, eye, rays, f)
 
 %x0 Werte
 N= zeros(size(grid,1),size(grid,2));
-h=0.0001;
+h=0.000001;
 eps = 0.01;
 %rays = ray(grid,eye);
 
