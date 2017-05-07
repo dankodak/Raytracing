@@ -10,9 +10,9 @@ eps = 0.01;
 %rays = ray(grid,eye);
 
 %Newtonverfahren mit numerischer Ableitung
-for k=1:50
+for k=1:10
     M=N;
-    N = N-comp(f,N,rays,eye)./((comp(f,N+h,rays,eye)-comp(f,N,rays,eye))./h); 
+    N = N-comp(f,N,rays,eye,h); 
 end
 
 %Wir machen Null zuerst weil sonst werden in bool 1 mit 0 überschrieben 
