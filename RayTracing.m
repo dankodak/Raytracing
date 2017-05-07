@@ -33,10 +33,11 @@ rays = ray(grid,eye);
 Bool=zeros(height+1,width+1,amount_objects);
 ABig = zeros(height+1,width+1,3,7);
 NS = Bool;
+lightings = zeros(size(rays));
 
 for i = 1:amount_objects
     [Bool(:,:,i),NS(:,:,i)] = Newton(grid,eye,rays,objects(i));
-    ABig(:,:,:,i) = lighting(rlight,amb,dir,lamp,objects(i),NS(:,:,i),eye,rays,Bool(:,:,i),rho(:,i),chess(i),1);
+    ABig(:,:,:,i) = lighting2(rlight,amb,dir,lamp,objects(i),NS(:,:,i),eye,rays,Bool(:,:,i),rho(:,i),chess(i),1);
 end
 
 for i = 1:height+1
