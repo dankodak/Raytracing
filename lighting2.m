@@ -6,7 +6,6 @@ function [Light]=lighting2(rlight,amb,dir,lamp,f,N,Eye,rays,bool,rho_color,chess
 %N=Matrix mit Nullstellen der Verknuepfung von Koerperfunktion und Strahl
 %rays=Matrix mit Richtungvektoren der Strahlen
 %bool=Wahrheitsmatrix mit Schnittpunkt oder ohne Schnittpunkt
-tic
 Normal = normalvector(f,N,Eye,rays);
 Light = zeros(size(rays));
 I_diff = Light;
@@ -84,6 +83,5 @@ if spec == 1
     
 end
 
-toc
 Light = I_diff +I_amb+I_spec;
 end
