@@ -1,9 +1,9 @@
-function RayTracing(width, height, eye, rlight, amb, lamp, dir, amount_objects, spec, equations, rho, chess)
+function RayTracing(width, height, p, dist, eye, newton, rlight, amb, lamp, dir, amount_objects, spec, equations, rho, chess)
 a = str2func(equations{1})
 % width = 100;
 % height = 100;
-p = [10;-2.5;-2.5];
-dist = 0.05;
+%p = [10;-2.5;-2.5];
+%dist = 0.05;
 r1 = [0;1;0];
 r2 = [0;0;1];
 % rlight=[-1;-1;0];
@@ -38,7 +38,7 @@ NS = Bool;
 lightings = zeros(size(rays));
 
 for i = 1:amount_objects
-    [Bool(:,:,i),NS(:,:,i)] = Newton(grid,eye,rays,str2func(equations{i}));
+    [Bool(:,:,i),NS(:,:,i)] = Newton(grid,eye,rays,str2func(equations{i}), newton);
     ABig(:,:,:,i) = lighting2(rlight,amb,dir,lamp,str2func(equations{i}),NS(:,:,i),eye,rays,Bool(:,:,i),rho(i,:),chess(i),spec);
 end
 

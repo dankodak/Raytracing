@@ -1,4 +1,4 @@
-function [bool,N] = Newton(grid, eye, rays, f)
+function [bool,N] = Newton(grid, eye, rays, f, iter)
 %f Koerperfunktion von R3 nach R
 %bool = Wahrheitswert ob NS existiert
 %Falls ja, dann 1, sonst 0
@@ -10,7 +10,7 @@ eps = 0.01;
 %rays = ray(grid,eye);
 
 %Newtonverfahren mit numerischer Ableitung
-for k=1:10
+for k=1:iter
     M=N;
     N = N-comp(f,N,rays,eye,h); 
 end

@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 07-May-2017 22:22:36
+% Last Modified by GUIDE v2.5 08-May-2017 18:26:42
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -87,7 +87,9 @@ dir = str2double(get(handles.dir, 'string'));
 eye = str2num(get(handles.eye, 'string'));
 amount_objects = str2num(get(handles.amount, 'string'));
 spec = get(handles.spec, 'Value');
-
+p = str2num(get(handles.p, 'string'));
+dist = str2double(get(handles.dist, 'string'));
+newton = str2double(get(handles.newton, 'string'));
 
 equations = cell(amount_objects,1);
 equations(1) =  {(get(handles.eq1, 'string'))};
@@ -100,7 +102,7 @@ rho(1,1) = get(handles.r1, 'Value');
 rho(1,2) = get(handles.g1, 'Value');
 rho(1,3) = get(handles.b1, 'Value');
 
-RayTracing(width, height, eye, rlight, amb, lamp, dir, amount_objects, spec, equations, rho, chess)
+RayTracing(width, height, p, dist, eye, newton, rlight, amb, lamp, dir, amount_objects, spec, equations, rho, chess)
 
 
 
@@ -422,3 +424,93 @@ function chess1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of chess1
+
+
+
+function p_Callback(hObject, eventdata, handles)
+% hObject    handle to p (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of p as text
+%        str2double(get(hObject,'String')) returns contents of p as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function p_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to p (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function dist_Callback(hObject, eventdata, handles)
+% hObject    handle to dist (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of dist as text
+%        str2double(get(hObject,'String')) returns contents of dist as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function dist_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to dist (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in lowres.
+function lowres_Callback(hObject, eventdata, handles)
+% hObject    handle to lowres (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+set(handles.width, 'string', 100);
+set(handles.height, 'string', 100);
+set(handles.dist, 'string', 0.05);
+
+% --- Executes on button press in highres.
+function highres_Callback(hObject, eventdata, handles)
+% hObject    handle to highres (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+set(handles.width, 'string', 1000);
+set(handles.height, 'string', 1000);
+set(handles.dist, 'string', 0.005);
+
+
+
+function newton_Callback(hObject, eventdata, handles)
+% hObject    handle to newton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of newton as text
+%        str2double(get(hObject,'String')) returns contents of newton as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function newton_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to newton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
