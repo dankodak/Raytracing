@@ -1,27 +1,18 @@
 function RayTracing(width, height, p, r1, r2, dist, eye, newton, rlight, amb, lamp, dir, amount_objects, spec, equations, rho, chess)
-a = str2func(equations{1})
-% width = 100;
-% height = 100;
-%p = [10;-2.5;-2.5];
-%dist = 0.05;
-% r1 = [0;1;0];
-% r2 = [0;0;1];
-% rlight=[-1;-1;0];
-% lamp=[16;7;7];
-% amb=[0.2,0.2,0.2];
-% dir=1;
-% eye = [13,0,0];
-% amount_objects = 2;
-% chess = zeros(amount_objects,1);
-% chess(1:7)=1;
-% rho = ones(3,amount_objects);
-% rho(:,1) = [1;0.1;0.7];
-% rho(:,2) = [1,1,1];
-% rho(:,3) = [1;0.5;0.14];
-% rho(:,4) = [1;0.5;0.14];
-% rho(:,5) = [1;0.5;0.14];
-% rho(:,6) = [1;0.5;0.14];
-% rho(:,7) = [1;0.5;0.14];
+% width = Breite der Bildebene in Pixel
+% height = Hoehe der Bildebene in Pixel
+% p = Position der linken unteren Bildebenenecke
+% dist = Abstand Pixel
+% r1 = 1. Richtungsvektor der Bildebene
+% r2 = 2. Richtungsvektor der Bildebene
+% rlight= [-1;-1;0];
+% lamp= Position punktfoermiger Lichtquelle
+% amb= ambiente Helligkeit
+% dir= gerichtete Lichtquelle
+% eye = Position Auge/Kamera
+% amount_objects = Anzahl der Objekte
+% chess = Schachbrett ja/meim für jedes Objekt gespeichert in Vektor
+% rho = Farbe für jedes Objekte 
 
 %x = x1 Achse
 %y = x3 Achse
@@ -29,19 +20,24 @@ a = str2func(equations{1})
 
 
 tic
+% Gitter und Strahlen erstellen
 [grid] = CreateGrid(width, height, p, dist, r1, r2);
 rays = ray(grid,eye);
 
+% Vorbelegung 
 Bool=zeros(height+1,width+1,amount_objects);
 ABig = zeros(height+1,width+1,3,7);
 NS = Bool;
 lightings = zeros(size(rays));
 
+% Berechnung von Wahrheitswerten, Nullstellen und Beleuchtung fuer jedes
+% Objekt
 for i = 1:amount_objects
     [Bool(:,:,i),NS(:,:,i)] = Newton(grid,eye,rays,str2func(equations{i}), newton);
     ABig(:,:,:,i) = lighting2(rlight,amb,dir,lamp,str2func(equations{i}),NS(:,:,i),eye,rays,Bool(:,:,i),rho(i,:),chess(i),spec);
 end
 
+% Bestimmung des naehesten Objektes
 for i = 1:height+1
     for j = 1:width+1
         % Index naehstes Objekt
@@ -63,5 +59,6 @@ for i = 1:height+1
 end
 toc
 
+% Plot 
 image(lightings)
 end
