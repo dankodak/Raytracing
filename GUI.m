@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 09-May-2017 16:57:11
+% Last Modified by GUIDE v2.5 12-May-2017 22:04:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -904,3 +904,14 @@ function grid2_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in save.
+function save_Callback(hObject, eventdata, handles)
+% hObject    handle to save (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+Fig = figure;
+copyobj(handles.axes2, Fig);
+hgsave(Fig, 'plot.fig');
+print(handles.axes2, 'plot','-dpng');
